@@ -27,11 +27,12 @@ public class GeneticoReina {
         this.poblacionActual = new ArrayList<>();
     }
     
-    public void evolucionar(){
+    public double[] evolucionar(){
     
-    
+    double[] fitness  = new double[this.numGeneraciones];
     generarPoblacionInicial();    
     // proceso evolutivo que tiene relación con el numero de generaciones
+    //fitness[0] = tools.mejorPoblacion(getPoblacionActual()).getFitness();
     for(int g=1;g<this.numGeneraciones;g++){
         ArrayList<Reina> nuevaPob = new ArrayList<>();
         // garantizar que se va a generar una población nueva 
@@ -51,10 +52,12 @@ public class GeneticoReina {
         }
         // actualización de la población
         sustituirPoblacion(nuevaPob);
+        //System.out.println("G: "+g+" Fitness"+tools.mejorPoblacion(getPoblacionActual()).getFitness());
+        fitness[g] = tools.mejorPoblacion(getPoblacionActual()).getFitness();
     }
     
     
-    
+    return fitness;
     
     }
 

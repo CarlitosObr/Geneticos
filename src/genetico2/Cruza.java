@@ -16,7 +16,7 @@ public class Cruza {
         int[] gen2 = new int[madre.getGenotipo().length];
         // recorrer la mascara ¿
         for(int x=0; x < mask.length; x++){
-            // padre
+            // padre jeje
             if(mask[x]==0){
                 gen1[x]= padre.getGenotipo()[x];
                 gen2[x]= madre.getGenotipo()[x];
