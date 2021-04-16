@@ -24,7 +24,7 @@ public class test {
 //        System.out.println(r.getFitness());
 //        //System.out.println(r2.getFitness());
 
-        GeneticoReina gb = new GeneticoReina(50, 1000, 0.12, 12);
+        GeneticoReina gb = new GeneticoReina(50, 1000, 0.12, 8);
         //gb.evolucionar();
        double[] evolucion = gb.evolucionar();
 //        Grafica g = new Grafica("Generación", "Fitness", "N-Reinas");
@@ -33,9 +33,9 @@ public class test {
 //        g.muestraGrafica();
         archivero.archivos.escribir(gb.getPoblacionActual());
         
-      //  ArrayList<Reina> nueva = archivero.archivos.tokenizarDataSet();
+        ArrayList<Reina> nueva = archivero.archivos.tokenizarDataSet();
         //System.out.println(nueva.get(0).toString());
-        // System.out.println();
+         System.out.println();
        // System.out.println(tools.mejorPoblacion(gb.getPoblacionActual()).toString());
     }
 }

@@ -6,6 +6,7 @@
 package genetico2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Random;
  * @author carli
  */
 public class tools {
-    public static int[] generaPosi(int n){
+     public static int[] generaPosi(int n){
         int[] arreglo = new int[n];
         Random ran = new Random();
         for(int x=0; x< n ;x++){
