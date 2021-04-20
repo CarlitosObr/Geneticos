@@ -5,21 +5,28 @@
  */
 package TCP;
 
+import java.io.IOException;
+
 /**
  *
  * @author carli
  */
 public class test {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
 //        Individuo n = new Individuo(8);
 //        System.out.println(); 
-          int[][] hola =  herramientas.inicializaCaminos(8);
-          herramientas.imprimirMatriz(hola, 8);
-          Individuo n = new Individuo(8,hola);
-          System.out.println(n.toString()); 
-          
-          
+        int n1 = 10;
+        int[][] hola = LeerDatos.tokenizarDataSet();
+        //System.out.println("hola perro: " + hola.length);
+        //herramientas.imprimirMatriz(hola);
+        GeneticoTCP g = new GeneticoTCP(20,15,0.12,hola.length,4,hola);
+        System.out.println("hola perro: " + hola.length);
+        Poblacion n = g.getPoblacionActual();
+        System.out.println("hola perro: " + hola.length);
+//          Individuo n = new Individuo(n1,hola);
+//          System.out.println(n.toString()); 
+
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package genetico2;
 
+import binario.Poblacion;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,4 +19,5 @@ public class Seleccion {
         int pos = ran.nextInt(pob.size());
         return new Reina(pob.get(pos));
     }
+     
 }

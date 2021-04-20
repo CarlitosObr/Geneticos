@@ -17,13 +17,13 @@ import java.util.Random;
  */
 public class herramientas {
 
-    public static int[] generaPosi(int n) {
+    public static int[] generaPosi(int n,int inicio) {
         int[] arreglo = new int[n];
         HashMap<Integer, Integer> entrenador = new HashMap();
         Random ran = new Random();
-        int primero = ran.nextInt(n);
-        arreglo[0] = primero;
-        entrenador.put(0, primero);
+        int primero;
+        arreglo[0] = inicio;
+        entrenador.put(0, inicio);
        // System.out.println(primero);
         for (int x = 1; x < n; x++) {
             primero = generarNumeroAleatorioControlado(n, entrenador);
@@ -76,11 +76,14 @@ public class herramientas {
         return caminos;
     }
 
-    public static void imprimirMatriz(int[][] matriz, int n) {
-        for (int x = 0; x < n; x++) {
-            for (int y = 0; y < n; y++) {
+    public static void imprimirMatriz(int[][] matriz) {
+        for (int x = 0; x < matriz.length; x++) {
+            for (int y = 0; y < matriz.length; y++) {
                 System.out.print(matriz[x][y]);
-                System.out.print("\t");
+               // if(y!=matriz.length-1){
+                   System.out.print("\t"); 
+                //}
+                
             }
             System.out.println();
         }

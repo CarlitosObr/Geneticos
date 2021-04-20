@@ -26,16 +26,16 @@ public class Individuo {
         calcularFitness();
     }
 
-    public Individuo(Individuo individuo,int[][] caminos) {
+    public Individuo(Individuo individuo) {
         this.genotipo = individuo.getGenotipo();
         this.fitness = individuo.getFitness();
-        this.caminos = caminos;
+        this.caminos = individuo.getCaminos();
         //this.n = reinita.getN();
     }
 
-    public Individuo(int n,int[][] caminos) {
-        this.n = n;
-        this.genotipo = herramientas.generaPosi(n);
+    public Individuo(int in,int[][] caminos) {
+        this.n = in;
+        this.genotipo = herramientas.generaPosi(caminos.length,in);
         this.caminos = caminos;
         calcularFitness();  
     }
@@ -108,7 +108,7 @@ public class Individuo {
 //     }
     @Override
     public String toString() {
-        return "Individuo{" + "genotipo=" + Arrays.toString(genotipo) + ", fitness=" + fitness + ", n=" + n + ", caminos=" + caminos + '}';
+        return "Individuo{" + "genotipo=" + Arrays.toString(genotipo) + ", fitness=" + fitness + '}';
     }
 
     
