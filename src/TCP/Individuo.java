@@ -85,10 +85,10 @@ public class Individuo {
     public void calcularFitness(){
         for(int x = 0; x<this.genotipo.length-1; x++){
             this.fitness += this.caminos[this.genotipo[x]][this.genotipo[x+1]];
-            System.out.println(this.caminos[this.genotipo[x]][this.genotipo[x+1]]); 
+            //System.out.println(this.caminos[this.genotipo[x]][this.genotipo[x+1]]); 
         }
         this.fitness += this.caminos[this.genotipo[this.genotipo.length-1]][this.genotipo[0]];
-        System.out.println(this.caminos[this.genotipo[this.genotipo.length-1]][this.genotipo[0]]);
+        //System.out.println(this.caminos[this.genotipo[this.genotipo.length-1]][this.genotipo[0]]);
     }
     
 //    public void iniciarCaminos(){

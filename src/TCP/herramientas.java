@@ -34,11 +34,11 @@ public class herramientas {
         return arreglo;
     }
 
-    public static Reina mejorPoblacion(ArrayList<Reina> pob) {
-        Reina mejor = new Reina(pob.get(0));
-        for (Reina aux : pob) {
+    public static Individuo mejorPoblacion(ArrayList<Individuo> pob) {
+        Individuo mejor = new Individuo(pob.get(0));
+        for (Individuo aux : pob) {
             if (aux.getFitness() < mejor.getFitness()) {
-                mejor = new Reina(aux);
+                mejor = new Individuo(aux);
             }
         }
         return mejor;

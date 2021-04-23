@@ -57,8 +57,8 @@ public class GeneticoTCP {
         }
         // actualización de la población
         sustituirPoblacion(nuevaPob);
-        //System.out.println("G: "+g+" Fitness"+tools.mejorPoblacion(getPoblacionActual()).getFitness());
-        //fitness[g] = tools.mejorPoblacion(getPoblacionActual()).getFitness();
+        System.out.println("G: "+g+" Fitness"+herramientas.mejorPoblacion(this.poblacionActual.getPoblacion()).getFitness());
+        fitness[g] = herramientas.mejorPoblacion(this.poblacionActual.getPoblacion()).getFitness();
     }
     
     

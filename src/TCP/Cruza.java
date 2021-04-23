@@ -36,8 +36,8 @@ public class Cruza {
                     gen2[x+1] = padre.getGenotipo()[x+1];
                 }
             }
-            System.out.println("Hijo 1: " + Arrays.toString(gen1));
-            System.out.println("Hijo 2: " + Arrays.toString(gen2));
+            //System.out.println("Hijo 1: " + Arrays.toString(gen1));
+            //System.out.println("Hijo 2: " + Arrays.toString(gen2));
             maskarita = binario.Herramientas.generarArregloBinarios(madre.getGenotipo().length-1);
         } while (!validaHijo(gen1) || !validaHijo(gen2));
 
@@ -45,7 +45,7 @@ public class Cruza {
         Individuo i2 = new Individuo(gen2, caminos);
         System.out.println("INDIVIDUO 1: " +i1.toString());
         System.out.println("INDIVIDUO 2: " + i2.toString());
-        if (i1.getFitness() < i2.getFitness()) {
+        if (i1.getFitness() <= i2.getFitness()) {
             return i1;
         } else {
             return i2;
@@ -65,11 +65,12 @@ public class Cruza {
         return true;
     }
 
-    public static void main(String args[]) throws IOException {
+   /*public static void main(String args[]) throws IOException {
            int[][] prueba = LeerDatos.tokenizarDataSet();
            Individuo padre = new Individuo(2,prueba);
            Individuo madre = new Individuo(2,prueba);
            int[] maska = binario.Herramientas.generarArregloBinarios(madre.getGenotipo().length-1);
-           cruzaPorMascaraBinaria(2,padre,madre,maska,prueba);
-    }
+           Individuo ne = cruzaPorMascaraBinaria(2,padre,madre,maska,prueba);
+           System.out.println("EL MEJOR: " + ne.toString());
+    }*/
 }

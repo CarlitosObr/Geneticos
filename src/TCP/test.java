@@ -20,12 +20,17 @@ public class test {
         int[][] hola = LeerDatos.tokenizarDataSet();
         //System.out.println("hola perro: " + hola.length);
         //herramientas.imprimirMatriz(hola);
-        GeneticoTCP g = new GeneticoTCP(20,15,0.12,hola.length,4,hola);
-        System.out.println("hola perro: " + hola.length);
-        Poblacion n = g.getPoblacionActual();
-        System.out.println("hola perro: " + hola.length);
+        GeneticoTCP g = new GeneticoTCP(20,15,0.12,hola.length,1,hola);
+        double[] evolucion = g.evolucionar();
+//        System.out.println("hola perro: " + hola.length);
+//        Poblacion n = g.getPoblacionActual();
+//        System.out.println("hola perro: " + hola.length);
 //          Individuo n = new Individuo(n1,hola);
 //          System.out.println(n.toString()); 
+          //Grafica g = new Grafica("Generación", "Fitness", "TSP");
+//        g.agregarSerie("Evolucion", evolucion);
+//        g.crearGrafica();
+//        g.muestraGrafica();
 
     }
 

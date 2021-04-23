@@ -18,7 +18,7 @@ public class Muta {
         Random ran = new Random();
         int pos = ran.nextInt(ind.getGenotipo().length);
         int nuevapos = ran.nextInt(ind.getGenotipo().length);
-        while (pos == nuevapos && (pos == 0 || nuevapos==0)) {
+        while (pos == nuevapos || pos == 0 || nuevapos==0) {
              pos = ran.nextInt(ind.getGenotipo().length);
              nuevapos = ran.nextInt(ind.getGenotipo().length);
         }
@@ -28,11 +28,11 @@ public class Muta {
         ind.calcularFitness();
     }
     
-    public static void main(String args[]) throws IOException{
+   /* public static void main(String args[]) throws IOException{
         int[][] hola = LeerDatos.tokenizarDataSet();
         Individuo n = new Individuo(3,hola);
         System.out.println(n.toString());
         mutaSimple(n);
         System.out.println(n.toString());
-    }
+    }*/
 }
