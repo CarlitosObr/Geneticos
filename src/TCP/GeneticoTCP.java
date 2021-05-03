@@ -51,10 +51,13 @@ public class GeneticoTCP {
             Individuo hijo = Cruza.cruzaPorMascaraBinaria(this.inicial,madre, padre, mask,this.caminos);
             // Se aplica una muta evaluando una probabilidad
             if (generarProbabilidadMuta()){
+                // System.out.println("ESTOY AQUÍ");
                Muta.mutaSimple(hijo);
+               //System.out.println("JEJE");
             }
             nuevaPob.getPoblacion().add(hijo);
         }
+        //System.out.println("ESTOY AQUÍ");
         // actualización de la población
         sustituirPoblacion(nuevaPob);
         System.out.println("G: "+g+" Fitness"+herramientas.mejorPoblacion(this.poblacionActual.getPoblacion()).getFitness());

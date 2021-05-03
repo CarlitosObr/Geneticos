@@ -39,12 +39,12 @@ public class Cruza {
             //System.out.println("Hijo 1: " + Arrays.toString(gen1));
             //System.out.println("Hijo 2: " + Arrays.toString(gen2));
             maskarita = binario.Herramientas.generarArregloBinarios(madre.getGenotipo().length-1);
-        } while (!validaHijo(gen1) || !validaHijo(gen2));
+        } while (!validaHijo(gen1) && !validaHijo(gen2));
 
         Individuo i1 = new Individuo(gen1, caminos);
         Individuo i2 = new Individuo(gen2, caminos);
-        System.out.println("INDIVIDUO 1: " +i1.toString());
-        System.out.println("INDIVIDUO 2: " + i2.toString());
+       //System.out.println("INDIVIDUO 1: " +i1.toString());
+        //System.out.println("INDIVIDUO 2: " + i2.toString());
         if (i1.getFitness() <= i2.getFitness()) {
             return i1;
         } else {
