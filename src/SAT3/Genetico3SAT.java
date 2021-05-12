@@ -62,7 +62,7 @@ public class Genetico3SAT {
             //System.out.println("ESTOY AQUÍ");
             // actualización de la población
             sustituirPoblacion(nuevaPob);
-            System.out.println("G: " + g + " Fitness" + SAT3.herramientas.mejorPoblacion3SAT(this.pobActual.getPoblacion()).getFitness());
+            System.out.println("G: " + g + " Fitness" + SAT3.herramientas.mejorPoblacion3SAT(this.pobActual.getPoblacion()).getFitness()+" Con una pMuta de: "+getPMuta());
             fitness[g] = SAT3.herramientas.mejorPoblacion3SAT(this.pobActual.getPoblacion()).getFitness();
         }
 
@@ -92,5 +92,13 @@ public class Genetico3SAT {
 
     public void setPoblacionActual(Poblacion poblacionActual) {
         this.pobActual = poblacionActual;
+    }
+    
+    public void setPMuta(double muta){
+        this.pMuta = muta;
+    }
+    
+    public double getPMuta(){
+        return pMuta;
     }
 }
