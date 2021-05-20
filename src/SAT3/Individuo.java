@@ -65,6 +65,16 @@ public class Individuo {
 
     }
 
+    public boolean isMejor(Individuo ind) {
+//       double distancia = ind.getFitnessDistancias();
+//       double inclinacion = ind.getFitnessInclinaciones();
+        if (this.fitness > ind.getFitness()) {
+
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return the genotipo
      */
@@ -108,13 +118,13 @@ public class Individuo {
     }
 
     private boolean validaInstancia(int[] elementos) {
-        int ev,cont=0;
-       // System.out.println("PRUEBA ");
+        int ev, cont = 0;
+        // System.out.println("PRUEBA ");
         for (int x = 0; x < elementos.length; x++) {
-           // System.out.println("VALOR "+ x);
-            ev = getGenotipo()[Math.abs(elementos[x])-1];
-           // System.out.print("VALOR evaluado: "+(Math.abs(elementos[x])-1));
-           // System.out.print(" VALOR: "+ elementos[x]+ " BINARIO: "+ev);
+            // System.out.println("VALOR "+ x);
+            ev = getGenotipo()[Math.abs(elementos[x]) - 1];
+            // System.out.print("VALOR evaluado: "+(Math.abs(elementos[x])-1));
+            // System.out.print(" VALOR: "+ elementos[x]+ " BINARIO: "+ev);
             if (elementos[x] * -1 == Math.abs(elementos[x])) {
                 ev = ev - 1;
             }
@@ -123,12 +133,12 @@ public class Individuo {
             if (Math.abs(ev) == 1) {
                 cont++;
             }
-            
-           // System.out.print(" cambio a: "+ Math.abs(ev));
+
+            // System.out.print(" cambio a: "+ Math.abs(ev));
             //System.out.println();
         }
         if (cont != 0) {
-           // System.out.println("----- CLARO QUE YES------");
+            // System.out.println("----- CLARO QUE YES------");
             return true;
         } else {
             return false;

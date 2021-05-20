@@ -5,6 +5,8 @@
  */
 package SAT3;
 
+import graficar.Grafica;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -12,28 +14,31 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
  * @author carli
  */
-public class JFramePrincipal extends javax.swing.JFrame implements ActionListener ,Runnable{
+public class JFramePrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form JFramePrincipal
      */
-    Genetico3SAT g; 
-    
-    public JFramePrincipal(Genetico3SAT g) throws IOException {
+    //Genetico3SAT g; 
+    public JFramePrincipal(ArrayList<Instancias> inst) {
         initComponents();
-        this.g = g;
-        //Subproceso s = new Subproceso(Double.parseDouble(this.jTextField1.getText()),g);
-        //s.start();
-        //Subproceso s = new Subproceso(Double.parseDouble(this.jTextField1.getText()),g);
-            
-        
-        this.jButton1.addActionListener(this);
+        //this.jDesktopPane1.setVisible(true);
+        Genetico3SAT g = new Genetico3SAT(10000, 0.5, 500, 100, inst, this);
 
+        HiloListener hl = new HiloListener(this, g);
+        this.jButton1.addActionListener(hl);
+
+        Thread h1 = new Thread(g);
+        h1.start();
     }
 
     /**
@@ -45,12 +50,21 @@ public class JFramePrincipal extends javax.swing.JFrame implements ActionListene
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        seleccion = new javax.swing.ButtonGroup();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        jPanelDeGrafica = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldGen = new javax.swing.JTextField();
+        jTextFieldPobla = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        aleatoria = new javax.swing.JRadioButton();
+        torneo = new javax.swing.JRadioButton();
+        ruleta = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,66 +72,138 @@ public class JFramePrincipal extends javax.swing.JFrame implements ActionListene
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jScrollPane2.setViewportView(jTextArea1);
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Probabilidad de muta");
+        jLabel1.setText("Probabilidad de muta ");
 
-        jDesktopPane1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jPanelDeGrafica.setBorder(new javax.swing.border.MatteBorder(null));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addComponent(jLabel1)
-                .addContainerGap(153, Short.MAX_VALUE))
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+        javax.swing.GroupLayout jPanelDeGraficaLayout = new javax.swing.GroupLayout(jPanelDeGrafica);
+        jPanelDeGrafica.setLayout(jPanelDeGraficaLayout);
+        jPanelDeGraficaLayout.setHorizontalGroup(
+            jPanelDeGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 489, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                .addContainerGap())
+        jPanelDeGraficaLayout.setVerticalGroup(
+            jPanelDeGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        jLabel2.setText("Generaciones");
+
+        jTextFieldGen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldGenActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Población");
+
+        seleccion.add(aleatoria);
+        aleatoria.setText("Aleatoria");
+
+        seleccion.add(torneo);
+        torneo.setText("Torneo");
+
+        seleccion.add(ruleta);
+        ruleta.setText("Ruleta");
+
+        jLabel4.setText("Tipo de Selección");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldPobla, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                .addComponent(jTextFieldGen)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(aleatoria)
+                                .addGap(18, 18, 18)
+                                .addComponent(ruleta)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(77, 77, 77)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel1)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(85, 85, 85)
+                                        .addComponent(torneo))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4)
+                                        .addGap(15, 15, 15)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                                .addComponent(jButton1)))))
+                .addGap(18, 18, 18)
+                .addComponent(jPanelDeGrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldGen, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldPobla, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(23, 23, 23))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(7, 7, 7)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(aleatoria)
+                                            .addComponent(ruleta))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(torneo)
+                                        .addGap(10, 10, 10)))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 29, Short.MAX_VALUE))
+                    .addComponent(jPanelDeGrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldGenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldGenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,41 +235,114 @@ public class JFramePrincipal extends javax.swing.JFrame implements ActionListene
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton aleatoria;
     private javax.swing.JButton jButton1;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanelDeGrafica;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldGen;
+    private javax.swing.JTextField jTextFieldPobla;
+    private javax.swing.JRadioButton ruleta;
+    public static javax.swing.ButtonGroup seleccion;
+    private javax.swing.JRadioButton torneo;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JButton b = (JButton) e.getSource();
-       if (b.getText().equals("Cambiar")) {
-           this.g.setPMuta(Double.parseDouble(this.jTextField1.getText()));
-            
-            
-            //Subproceso s = new Subproceso(Double.parseDouble(this.jTextField1.getText()),g);
-        }
+    public JTextField getjTextField1() {
+        return jTextField1;
     }
 
-    @Override
-    public void run() {
-        try {
-            new JFramePrincipal(this.g).setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(JFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    /**
+     * @return the jTextArea1
+     */
+    public javax.swing.JTextArea getjTextArea1() {
+        return jTextArea1;
     }
 
+    public JPanel getjPanelDeGrafica() {
+        return jPanelDeGrafica;
+    }
+
+    public void setjPanelDeGrafica(JPanel jPanelDeGrafica) {
+        this.jPanelDeGrafica = jPanelDeGrafica;
+    }
     
+    
+    public void actualizarGrafica(ArrayList<Integer> datops) {
+        Grafica grafica = new Grafica("Generacion", "Fitness", "Algoritmo Genético");
+        grafica.agregarSerie("Generaciones", datops);
+        grafica.crearGrafica();
+        ChartPanel cp = grafica.crearChartPanel(getjPanelDeGrafica().getSize());
 
-   
+        getjPanelDeGrafica().removeAll();
+        //jfp.getjPanelGrafica().remove(0);
+        getjPanelDeGrafica().add(cp, BorderLayout.CENTER);
+        getjPanelDeGrafica().updateUI();
+        
+        /*
+        try{sleep(2000);}catch(InterruptedException e){e.printStackTrace();}
+         */
+    }
+
+    /**
+     * @return the jTextFieldGen
+     */
+    public javax.swing.JTextField getjTextFieldGen() {
+        return jTextFieldGen;
+    }
+
+    /**
+     * @return the jTextFieldPobla
+     */
+    public javax.swing.JTextField getjTextFieldPobla() {
+        return jTextFieldPobla;
+    }
+    
+    public int saberSeleccion(){
+        if(this.aleatoria.isSelected()){
+            return 1;
+        }else if(this.torneo.isSelected()){
+            return 2;
+        }else if(this.ruleta.isSelected()){
+            return 3;
+        }else{
+            return 0;
+        }
+    }
+
+    public JRadioButton getAleatoria() {
+        return aleatoria;
+    }
+
+    public void setAleatoria(JRadioButton aleatoria) {
+        this.aleatoria = aleatoria;
+    }
+
+    public JRadioButton getRuleta() {
+        return ruleta;
+    }
+
+    public void setRuleta(JRadioButton ruleta) {
+        this.ruleta = ruleta;
+    }
+
+    public JRadioButton getTorneo() {
+        return torneo;
+    }
+
+    public void setTorneo(JRadioButton torneo) {
+        this.torneo = torneo;
+    }
+    
+    
 }

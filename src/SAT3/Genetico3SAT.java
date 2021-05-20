@@ -5,7 +5,7 @@
  */
 package SAT3;
 
-import TCP.herramientas;
+
 import binario.*;
 import genetico2.Reina;
 import genetico2.tools;
@@ -15,7 +15,9 @@ import java.util.ArrayList;
  *
  * @author carli
  */
-public class Genetico3SAT {
+
+//importante updateUI();
+public class Genetico3SAT implements Runnable{
 
     private int num_G;
     private double pMuta;
@@ -23,8 +25,10 @@ public class Genetico3SAT {
     private int tamPob;
     private int indice;
     private ArrayList<Instancias> inst;
+    private JFramePrincipal hl; 
+    private int seleccion=1;
 
-    public Genetico3SAT(int num_G, double pMuta, int tamPob, int indice, ArrayList<Instancias> inst) {
+    public Genetico3SAT(int num_G, double pMuta, int tamPob, int indice, ArrayList<Instancias> inst,JFramePrincipal hl) {
         this.num_G = num_G;
         this.pMuta = pMuta;
         this.tamPob = tamPob;
@@ -32,22 +36,26 @@ public class Genetico3SAT {
         this.pobActual = new Poblacion(tamPob, indice, inst);
         this.indice = indice;
         this.inst = inst;
-
+        this.hl = hl;
     }
 
     public double[] evolucionar() {
-        double[] fitness = new double[this.num_G];
+        double[] fitness = new double[this.getNum_G()];
+        ArrayList<Integer> datops = new ArrayList<>();
+         Individuo mejor = herramientas.mejorPoblacion3SAT(this.pobActual.getPoblacion());
+        datops.add(mejor.getFitness());
+        this.hl.actualizarGrafica(datops);
         //generarPoblacionInicial();    
         // proceso evolutivo que tiene relación con el numero de generaciones
         //fitness[0] = tools.mejorPoblacion(getPoblacionActual()).getFitness();
-        for (int g = 1; g < this.num_G; g++) {
+        for (int g = 1; g < this.getNum_G(); g++) {
             Poblacion nuevaPob = new Poblacion();
             // garantizar que se va a generar una población nueva 
-            for (int i = 0; i < this.tamPob; i++) {
+            for (int i = 0; i < this.getTamPob(); i++) {
                 // Seleccion de una madre 
-                Individuo madre = Seleccion.seleccionAleatoria(this.pobActual);
+                Individuo madre = eligeSeleccion(this.seleccion);
                 // Seleccion de un padre
-                Individuo padre = Seleccion.seleccionAleatoria(this.pobActual);
+                Individuo padre = eligeSeleccion(this.seleccion);
                 // cruza (Retornar el mejor ind de la cruza)
                 int[] mask = binario.Herramientas.generarArregloBinarios(madre.getGenotipo().length);
                 Individuo hijo = Cruza.cruzaPorMascara(mask, madre, padre,this.inst);
@@ -62,7 +70,12 @@ public class Genetico3SAT {
             //System.out.println("ESTOY AQUÍ");
             // actualización de la población
             sustituirPoblacion(nuevaPob);
-            System.out.println("G: " + g + " Fitness" + SAT3.herramientas.mejorPoblacion3SAT(this.pobActual.getPoblacion()).getFitness()+" Con una pMuta de: "+getPMuta());
+           
+            this.hl.getjTextArea1().append("G: " + g + " Fitness: " + SAT3.herramientas.mejorPoblacion3SAT(this.pobActual.getPoblacion()).getFitness()+"\n");
+             mejor = herramientas.mejorPoblacion3SAT(this.pobActual.getPoblacion());
+             datops.add(mejor.getFitness());
+             this.hl.actualizarGrafica(datops);
+            //System.out.println("G: " + g + " Fitness: " + SAT3.herramientas.mejorPoblacion3SAT(this.pobActual.getPoblacion()).getFitness()+" Con una pMuta de: "+getPMuta());
             fitness[g] = SAT3.herramientas.mejorPoblacion3SAT(this.pobActual.getPoblacion()).getFitness();
         }
 
@@ -86,6 +99,24 @@ public class Genetico3SAT {
        }
     }
     
+    private Individuo eligeSeleccion(int s){
+        Individuo i = null;
+        switch(s){
+            case 1:
+                i = Seleccion.seleccionAleatoria(pobActual);
+                break;
+            case 2: 
+                i = Seleccion.seleccionTorneo(pobActual);
+                break;
+            case 3:
+                i = Seleccion.seleccionRuleta(pobActual);
+            break;
+            default:
+                break;
+                
+        }
+        return i;
+    }
      public Poblacion getPoblacionActual() {
         return pobActual;
     }
@@ -101,4 +132,43 @@ public class Genetico3SAT {
     public double getPMuta(){
         return pMuta;
     }
+    
+    @Override
+    public void run() {
+        evolucionar();
+    }
+
+    /**
+     * @return the num_G
+     */
+    public int getNum_G() {
+        return num_G;
+    }
+
+    /**
+     * @param num_G the num_G to set
+     */
+    public void setNum_G(int num_G) {
+        this.num_G = num_G;
+    }
+
+    /**
+     * @return the tamPob
+     */
+    public int getTamPob() {
+        return tamPob;
+    }
+
+    /**
+     * @param tamPob the tamPob to set
+     */
+    public void setTamPob(int tamPob) {
+        this.tamPob = tamPob;
+    }
+
+    public void setSeleccion(int seleccion) {
+        this.seleccion = seleccion;
+    }
+    
+    
 }

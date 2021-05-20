@@ -44,7 +44,8 @@ public class Seleccion {
         }
         return pob.getPoblacion().get(pos);
     }
-
+    
+    
    /* public static void main(String args[]) {
         int[][] caminos= herramientas.inicializaCaminos(8);
         Poblacion p = new Poblacion(10, 8,caminos);

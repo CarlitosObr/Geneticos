@@ -5,10 +5,13 @@
  */
 package graficar;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
 import javafx.geometry.Orientation;
 import javax.swing.JInternalFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYDataItem;
@@ -54,6 +57,18 @@ public class Grafica {
 
     }
 
+    public void agregarSerie(String nombre, ArrayList<Integer> datos) {
+
+        XYSeries serie = new XYSeries(nombre);
+        // agregar cada uno de los datos en la serie 
+        for (int x = 0; x < datos.size(); x++) {
+            serie.add(x, datos.get(x));
+        }
+        // agregamos la serie que se generÃ³
+
+        this.series.addSeries(serie);
+    }
+
     /*public void agregarSerie(String nombre, int[] datos) {
 
         XYSeries serie = new XYSeries(nombre);
@@ -66,6 +81,12 @@ public class Grafica {
         this.series.addSeries(serie);
 
     }*/
+    public ChartPanel crearChartPanel(Dimension d) {
+        ChartPanel chartpanel = new ChartPanel(grafica);
+        chartpanel.setVisible(true);
+        chartpanel.setSize(d);
+        return chartpanel;
+    }
 
     public JFreeChart getGrafica() {
         return this.grafica;
@@ -80,7 +101,7 @@ public class Grafica {
         ChartFrame frame = new ChartFrame("Histograma de color", grafica);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(500,370);
+        frame.setSize(500, 370);
 
     }
 
