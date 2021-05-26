@@ -47,8 +47,8 @@ public class GeneticoTCP {
             // Seleccion de un padre
             Individuo padre = Seleccion.seleccionAleatoria(this.poblacionActual);
             // cruza (Retornar el mejor ind de la cruza)
-            int[] mask = binario.Herramientas.generarArregloBinarios(madre.getGenotipo().length-1);
-            Individuo hijo = Cruza.cruzaPorMascaraBinaria(this.inicial,madre, padre, mask,this.caminos);
+            //int[] mask = binario.Herramientas.generarArregloBinarios(madre.getGenotipo().length-1);
+            Individuo hijo = Cruza.cruzaAsexual(madre, padre,this.caminos);
             // Se aplica una muta evaluando una probabilidad
             if (generarProbabilidadMuta()){
                 // System.out.println("ESTOY AQUÍ");
@@ -60,8 +60,8 @@ public class GeneticoTCP {
         //System.out.println("ESTOY AQUÍ");
         // actualización de la población
         sustituirPoblacion(nuevaPob);
-        System.out.println("G: "+g+" Fitness"+herramientas.mejorPoblacion(this.poblacionActual.getPoblacion()).getFitness());
-        fitness[g] = herramientas.mejorPoblacion(this.poblacionActual.getPoblacion()).getFitness();
+        System.out.println("G: "+g+" Fitness"+herramientas.mejorPoblacion(this.poblacionActual.getPoblacion()).getFitnessGeneral());
+        fitness[g] = herramientas.mejorPoblacion(this.poblacionActual.getPoblacion()).getFitnessGeneral();
     }
     
     

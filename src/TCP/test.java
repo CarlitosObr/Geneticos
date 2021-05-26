@@ -21,7 +21,7 @@ public class test {
         int[][] hola = LeerDatos.tokenizarDataSet();
         //System.out.println("hola perro: " + hola.length);
         //herramientas.imprimirMatriz(hola);
-        GeneticoTCP g = new GeneticoTCP(50,250,0.12,hola.length,3,hola);
+        GeneticoTCP g = new GeneticoTCP(250,10000,0.12,hola.length,3,hola);
         double[] evolucion = g.evolucionar();
 //        System.out.println("hola perro: " + hola.length);
 //        Poblacion n = g.getPoblacionActual();
