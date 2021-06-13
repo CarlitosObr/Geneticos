@@ -5,11 +5,13 @@
  */
 package SAT3;
 
+import java.io.Serializable;
+
 /**
  *
  * @author carli
  */
-public class Instancias {
+public class Instancias implements Serializable{
     int[] elementos;
     
     public Instancias(int[] elementos){

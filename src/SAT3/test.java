@@ -17,22 +17,9 @@ public class test {
 
     public static void main(String args[]) throws IOException {
         ArrayList<Instancias> inst = archivo3SAT.tokenizarDataSet();
-        
-        
-//        Individuo i1 = new Individuo(new int[]{1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0},inst);
-//        Genetico3SAT g = new Genetico3SAT(10000, 0.5, 500, 100, inst);
+//        
          JFramePrincipal hr = new JFramePrincipal(inst);
          hr.setVisible(true);
-//        hr.setName("HiloR1");
-//        Thread h1 = new Thread(hr);
-//        h1.start();
-//        
-//        //System.out.println(i1.toString());
-//       double[] evolucion = g.evolucionar();
-//        System.out.println(herramientas.mejorPoblacion3SAT(g.getPoblacionActual().getPoblacion()).toString());
-//        Grafica g1 = new Grafica("Generación", "Fitness", "3SAT");
-//        g1.agregarSerie("Evolucion", evolucion);
-//        g1.crearGrafica();
-//        g1.muestraGrafica();
+     //       Manager m = new Manager(2);
     }
 }

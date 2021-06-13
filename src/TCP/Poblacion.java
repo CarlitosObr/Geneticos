@@ -18,17 +18,17 @@ public class Poblacion {
     private int i;
     private int inicial;
 
-    public Poblacion(int i,int inicial,int[][] camino){
+    public Poblacion(int i,int inicial,int[][] camino,double w1, double w2){
         this.i = i;
         this.inicial=inicial;
         this.poblacion = new ArrayList<>();
-        inicializarAleatorimente(camino);
+        inicializarAleatorimente(camino,w1,w2);
     }
 
-    public Poblacion(ArrayList<Individuo> muestra,int[][] caminos){
+    public Poblacion(ArrayList<Individuo> muestra,int[][] caminos,double w1,double w2){
         this.poblacion = new ArrayList<>();
         for(int x=0;x<muestra.size();x++){
-            this.poblacion.add(new Individuo(muestra.get(x).getGenotipo(),caminos));
+            this.poblacion.add(new Individuo(muestra.get(x).getGenotipo(),caminos,w1,w2));
         }
     }
 
@@ -37,19 +37,21 @@ public class Poblacion {
         
     }
 
-    public Poblacion(Poblacion n,int[][] camino){
+    public Poblacion(Poblacion n,int[][] camino,double w1, double w2){
         this.poblacion = new ArrayList<>();
         for(Individuo aux: n.getPoblacion()){
-            this.poblacion.add(new Individuo(aux.getGenotipo(),camino));
+            this.poblacion.add(new Individuo(aux.getGenotipo(),camino,w1,w2));
 
         }
 
     }
 
-    public void inicializarAleatorimente(int[][] camino){
+    public void inicializarAleatorimente(int[][] camino,double w1, double w2){
 
        for(int x=0; x< this.i; x++){
-            this.poblacion.add(new Individuo(this.inicial,camino));
+           
+           
+            this.poblacion.add(new Individuo(this.inicial,camino,w1,w2));
 
        }
 

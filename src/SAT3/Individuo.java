@@ -6,6 +6,7 @@
 package SAT3;
 
 import binario.Herramientas;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -13,7 +14,7 @@ import java.util.Arrays;
  *
  * @author carli
  */
-public class Individuo {
+public class Individuo implements Serializable{
 
     // atributos de un individuo simple
     private int[] genotipo;

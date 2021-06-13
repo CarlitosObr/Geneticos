@@ -15,7 +15,7 @@ import java.util.Random;
  * @author carli
  */
 public class Individuo {
-     public static double w1,w2;
+     public double w1,w2;
     private int[] genotipo;
     private int fitness;
     private int n;
@@ -24,10 +24,11 @@ public class Individuo {
     private int fitnessGeneral;
     private int fitnessIncli;
 
-    public Individuo(int[] genotipo, int[][] caminos) {
+    public Individuo(int[] genotipo, int[][] caminos,double w1, double w2) {
         this.genotipo = genotipo;
         this.caminos = caminos;
-        
+        this.w1 = w1;
+        this.w2 = w2;
         crearMatInclinacion(caminos);
         calcularFitness();
         calculaFitnessGeneral();
@@ -42,11 +43,12 @@ public class Individuo {
         //this.n = reinita.getN();
     }
 
-    public Individuo(int in, int[][] caminos) {
+    public Individuo(int in, int[][] caminos,double w1, double w2) {
         this.n = in;
         this.genotipo = herramientas.generaPosi(caminos.length, in);
         this.caminos = caminos;
-        
+        this.w1 = w1;
+        this.w2 = w2;
         crearMatInclinacion(caminos);
         calcularFitness();
         calculaFitnessGeneral();
@@ -112,11 +114,11 @@ public class Individuo {
         }
         this.fitnessIncli += this.matInclinacion[this.genotipo[this.genotipo.length - 1]][this.genotipo[0]];
         
-        this.fitnessGeneral = (int) (0.2*this.fitness + 0.8*this.fitnessIncli);
+        this.fitnessGeneral = (int) (w1*this.fitness + w2*this.fitnessIncli);
     }
     @Override
     public String toString() {
-        return "Individuo{" + "genotipo=" + Arrays.toString(genotipo) + ", fitness=" + fitness + '}';
+        return "Individuo{" + "genotipo=" + Arrays.toString(genotipo) + ", fitness=" + fitnessGeneral + '}';
     }
 
     /**
@@ -179,7 +181,7 @@ public class Individuo {
     public static void main(String args[]) throws IOException{
         int n1 = 10;
         int[][] hola = LeerDatos.tokenizarDataSet();
-        Individuo i = new Individuo(2,hola);
+        Individuo i = new Individuo(2,hola,1.1,.2);
         i.imprimeMatInclinacion();
     }
 

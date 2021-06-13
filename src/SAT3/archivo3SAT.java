@@ -91,7 +91,7 @@ public class archivo3SAT {
                 String clase = "";
                 String claseComp = "";
                 int n = 0;
-                for (int i = 0; i < lista.size(); i++) {
+                for (int i = 2; i < lista.size(); i++) {
                     StringTokenizer st = new StringTokenizer(lista.get(i), " ");
 
                     while (st.hasMoreTokens()) {

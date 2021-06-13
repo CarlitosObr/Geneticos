@@ -17,41 +17,41 @@ import java.util.Random;
  */
 public class Cruza {
 
-    public static Individuo cruzaPorMascaraBinaria(int inicio, Individuo madre, Individuo padre,
-            int[] mask, int[][] caminos) {
-        int[] gen1 = new int[madre.getGenotipo().length];
-        int[] gen2 = new int[madre.getGenotipo().length];
-        // recorrer la mascara ¿
-        int[] maskarita = mask;
-        do {
-            gen1[0] = inicio;
-            gen2[0] = inicio;
-            for (int x = 0; x < maskarita.length; x++) {
-                // padre jeje
-                if (maskarita[x] == 0) {
-                    gen1[x + 1] = padre.getGenotipo()[x + 1];
-                    gen2[x + 1] = madre.getGenotipo()[x + 1];
-                } // información madre
-                else {
-                    gen1[x + 1] = madre.getGenotipo()[x + 1];
-                    gen2[x + 1] = padre.getGenotipo()[x + 1];
-                }
-            }
-            //System.out.println("Hijo 1: " + Arrays.toString(gen1));
-            //System.out.println("Hijo 2: " + Arrays.toString(gen2));
-            maskarita = binario.Herramientas.generarArregloBinarios(madre.getGenotipo().length - 1);
-        } while (!validaHijo(gen1) && !validaHijo(gen2));
-
-        Individuo i1 = new Individuo(gen1, caminos);
-        Individuo i2 = new Individuo(gen2, caminos);
-        //System.out.println("INDIVIDUO 1: " +i1.toString());
-        //System.out.println("INDIVIDUO 2: " + i2.toString());
-        if (i1.getFitness() <= i2.getFitness()) {
-            return i1;
-        } else {
-            return i2;
-        }
-    }
+//    public static Individuo cruzaPorMascaraBinaria(int inicio, Individuo madre, Individuo padre,
+//            int[] mask, int[][] caminos) {
+//        int[] gen1 = new int[madre.getGenotipo().length];
+//        int[] gen2 = new int[madre.getGenotipo().length];
+//        // recorrer la mascara ¿
+//        int[] maskarita = mask;
+//        do {
+//            gen1[0] = inicio;
+//            gen2[0] = inicio;
+//            for (int x = 0; x < maskarita.length; x++) {
+//                // padre jeje
+//                if (maskarita[x] == 0) {
+//                    gen1[x + 1] = padre.getGenotipo()[x + 1];
+//                    gen2[x + 1] = madre.getGenotipo()[x + 1];
+//                } // información madre
+//                else {
+//                    gen1[x + 1] = madre.getGenotipo()[x + 1];
+//                    gen2[x + 1] = padre.getGenotipo()[x + 1];
+//                }
+//            }
+//            //System.out.println("Hijo 1: " + Arrays.toString(gen1));
+//            //System.out.println("Hijo 2: " + Arrays.toString(gen2));
+//            maskarita = binario.Herramientas.generarArregloBinarios(madre.getGenotipo().length - 1);
+//        } while (!validaHijo(gen1) && !validaHijo(gen2));
+//
+//        Individuo i1 = new Individuo(gen1, caminos);
+//        Individuo i2 = new Individuo(gen2, caminos);
+//        //System.out.println("INDIVIDUO 1: " +i1.toString());
+//        //System.out.println("INDIVIDUO 2: " + i2.toString());
+//        if (i1.getFitness() <= i2.getFitness()) {
+//            return i1;
+//        } else {
+//            return i2;
+//        }
+//    }
 
     public static boolean validaHijo(int[] gen) {
         HashMap<Integer, Integer> entrenador = new HashMap();
@@ -66,7 +66,7 @@ public class Cruza {
         return true;
     }
 
-    public static Individuo cruzaAsexual(Individuo padre, Individuo madre, int[][] caminos) {
+    public static Individuo cruzaAsexual(Individuo padre, Individuo madre, int[][] caminos,double w1, double w2) {
         int maskIndices[] = new int[padre.getGenotipo().length - 1];
         // creo la mascara de índices 
         for (int ii = 0; ii < maskIndices.length; ii++) {
@@ -85,8 +85,8 @@ public class Cruza {
             geno1[maskIndices[x - 1]] = padre.getGenotipo()[x];
             geno2[maskIndices[x - 1]] = madre.getGenotipo()[x];
         }
-        Individuo hijo1 = new Individuo(geno1, caminos);
-        Individuo hijo2 = new Individuo(geno2, caminos);
+        Individuo hijo1 = new Individuo(geno1, caminos,w1,w2);
+        Individuo hijo2 = new Individuo(geno2, caminos,w1,w2);
 
         ArrayList<Individuo> lista = new ArrayList<>();
         lista.add(madre);
