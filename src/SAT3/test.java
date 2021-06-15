@@ -20,6 +20,6 @@ public class test {
 //        
          JFramePrincipal hr = new JFramePrincipal(inst);
          hr.setVisible(true);
-     //       Manager m = new Manager(2);
+        //   Manager m = new Manager(2);
     }
 }

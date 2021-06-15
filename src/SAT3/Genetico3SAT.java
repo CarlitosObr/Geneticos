@@ -195,8 +195,9 @@ public class Genetico3SAT implements Runnable {
 
     @Override
     public void run() {
-        try {
-            evolucionarDistribuido();
+       try {
+            //evolucionar();
+           evolucionarDistribuido();
         } catch (RemoteException ex) {
             Logger.getLogger(Genetico3SAT.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
@@ -236,8 +237,8 @@ public class Genetico3SAT implements Runnable {
         this.seleccion = seleccion;
     }
 
-    public LinkedList<Individuo> getmuestraPob(int nmuestra) {
-        LinkedList<Individuo> ordenada = (LinkedList<Individuo>) this.pobActual.getPoblacion().clone();
+    public ArrayList<Individuo> getmuestraPob(int nmuestra) {
+        ArrayList<Individuo> ordenada = (ArrayList<Individuo>) this.pobActual.getPoblacion().clone();
         Collections.sort(ordenada, new Comparator<Individuo>() {
 
             @Override
@@ -245,7 +246,7 @@ public class Genetico3SAT implements Runnable {
                 return (int) (p2.getFitness() - p1.getFitness());
             }
         });
-        LinkedList<Individuo> muestras = new LinkedList<>();
+        ArrayList<Individuo> muestras = new ArrayList<>();
         for (int i = 0; i < nmuestra; i++) {
             muestras.add(ordenada.get(i));
 
@@ -253,8 +254,8 @@ public class Genetico3SAT implements Runnable {
         return muestras;
     }
 
-    public void setmuestraPob(LinkedList<Individuo> LL) {
-        LinkedList<Individuo> ordenada = (LinkedList<Individuo>) this.pobActual.getPoblacion().clone();
+    public void setmuestraPob(ArrayList<Individuo> LL) {
+        ArrayList<Individuo> ordenada = (ArrayList<Individuo>) this.pobActual.getPoblacion().clone();
         Collections.sort(ordenada, new Comparator<Individuo>() {
 
             @Override
@@ -263,7 +264,7 @@ public class Genetico3SAT implements Runnable {
             }
         });
 
-        LinkedList<Individuo> muestras = new LinkedList<>();
+        ArrayList<Individuo> muestras = new ArrayList<>();
         for (int i = this.tamPob - 1; i > this.tamPob - LL.size(); i--) {
             int r = 0;
             this.pobActual.getPoblacion().set(i, LL.get(r));

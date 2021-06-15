@@ -37,6 +37,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     public JFramePrincipal(int ident,ArrayList<Instancias> inst, Manager m) {
         initComponents();
         //this.jDesktopPane1.setVisible(true);
+        this.setTitle("Genético #"+ident);
         this.m = m;
         this.ident = ident;
         g = new Genetico3SAT(10000, 0.5, 500, 100, inst, this);
@@ -91,6 +92,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         torneo = new javax.swing.JRadioButton();
         ruleta = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
+        jButtonEnviar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,7 +110,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanelDeGrafica.setLayout(jPanelDeGraficaLayout);
         jPanelDeGraficaLayout.setHorizontalGroup(
             jPanelDeGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 491, Short.MAX_VALUE)
         );
         jPanelDeGraficaLayout.setVerticalGroup(
             jPanelDeGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,6 +137,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
         ruleta.setText("Ruleta");
 
         jLabel4.setText("Tipo de Selección");
+
+        jButtonEnviar.setText("Enviar");
+        jButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEnviarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,8 +185,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel4)
                                         .addGap(15, 15, 15)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                                .addComponent(jButton1)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButtonEnviar, javax.swing.GroupLayout.Alignment.TRAILING))))))
                 .addGap(18, 18, 18)
                 .addComponent(jPanelDeGrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -190,7 +201,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
+                                .addGap(65, 65, 65)
+                                .addComponent(jButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(layout.createSequentialGroup()
@@ -231,6 +244,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldGenActionPerformed
 
+    private void jButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarActionPerformed
+        // TODO add your handling code here:
+        this.m.intercambiarIndividuos(this.ident, Integer.parseInt(jfg.getGdestino().getText()),Integer.parseInt(jfg.getTamMues().getText()));
+    }//GEN-LAST:event_jButtonEnviarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,6 +287,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton aleatoria;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonEnviar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
